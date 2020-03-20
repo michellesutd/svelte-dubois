@@ -1,12 +1,12 @@
 <script>
 	import { scaleLinear } from 'd3-scale'
-	import {data} from './data';
+	import { data } from './data.js';
 	import Bar from './Bar.svelte';
 	import CurvedBar from './CurvedBar.svelte';
 
 
 	const chartStyle = document.createElement("style");
-chartStyle.innerHTML = `rect:hover { fill:white; } 
+chartStyle.innerHTML = `rect:hover { fill:white; }
         path:hover {
             fill: none;
             stroke: white;
@@ -18,7 +18,7 @@ document.getElementsByTagName("head")[0].appendChild(chartStyle);
 const widthScale = scaleLinear()
     .domain([0, 500])
 	.range([0, 500])
-	
+
 </script>
 
 <svelte:head>
@@ -44,20 +44,20 @@ const widthScale = scaleLinear()
             <text x="96" y="25">12</text>
             <rect x="120" y="25" height="8" width="8" />
           </g>  -->
-     
+
           <!-- <g>
-            
+
             <text x="14" y="550">Industrial</text>
             <text x="109" y="550">2252</text>
             <path d= "M 163 555 h369 a10 10 0 0,1, 0, 68 H58 a10 10 0 0,0, 0, 68 h220" fill="none" stroke="rgb(179, 156, 136)" stroke-width="8" />
           </g> -->
 
 		  {#each data as item, i}
-			
+
 			{#if item['shape']['type'] === 'curvedbar'}
-			
+
 				<!-- {console.log('Curved Bar')} -->
-				<CurvedBar 
+				<CurvedBar
 					courseName={item['course']['name']}
 					courseCoords = {item['course']['coords']}
 					noOfStudents = {item['students']['no']}
@@ -66,11 +66,11 @@ const widthScale = scaleLinear()
 					width = {[widthScale(item['shape']['width'][0]),widthScale(item['shape']['width'][1])]}
 				/>
 
-				
+
 			{/if}
 
 			{#if item['shape']['type'] === 'rect'}
-				<Bar 
+				<Bar
 
 					courseName={item['course']['name']}
 					courseCoords = {item['course']['coords']}
@@ -79,13 +79,13 @@ const widthScale = scaleLinear()
 					shapeCoords = {item['shape']['coords']}
 					width = {widthScale(item['shape']['width'])}
 				/>
-				
+
 			{/if}
       	{/each}
         </svg>
       </div>
 
-	  
+
 </main>
 
 <style>
